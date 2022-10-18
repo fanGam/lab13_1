@@ -94,6 +94,7 @@ namespace lab13_1
         // Number 5
         static void Task5()
         {
+            // 5.1
             int[] a = {5, 7, 8, 123, 324, 43};
             int[] b = new int[5];
             int[] c = new int[5];
@@ -112,6 +113,14 @@ namespace lab13_1
                 new Random();
                 c[i] = rand.Next(101);
             }
+
+            // 5.2
+            for (int i = 0; i < a.Length; i++)
+            {
+                Console.Write(a[i] + " ");
+            }
+
+            // 5.3
             for (int i = 0; i < a.Length; i++)
             {
                 if (a[i] < minis)
@@ -127,6 +136,8 @@ namespace lab13_1
             }
             Console.WriteLine($"The max of 1st mass is {maxis} with {maxii} index");
             Console.WriteLine($"The min of 1st mass is {minis} with {minii} index");
+
+            //5.3 (2 var)
             minis = 1000000;
             minii = 0;
             maxis = -1000000;
@@ -144,6 +155,8 @@ namespace lab13_1
                     maxii = i;
                 }
             }
+
+            // 5.3 (3 var) 
             Console.WriteLine($"The max of 2nd mass is {maxis} with {maxii} index");
             Console.WriteLine($"The min of 2nd mass is {minis} with {minii} index");
             minis = 1000000;
@@ -165,6 +178,8 @@ namespace lab13_1
             }
             Console.WriteLine($"The max of 3nd mass is {maxis} with {maxii} index");
             Console.WriteLine($"The min of 3nd mass is {minis} with {minii} index");
+
+            // 5.4
             int s = 0;
             for (int i = 0; i < a.Length; i++)
             {
@@ -173,6 +188,8 @@ namespace lab13_1
             double midl = (s / (double)a.Length);
             Console.WriteLine($"The summ of 1st mass is {s}");
             Console.WriteLine($"The middle amount is {midl}");
+
+            // 5.5
             int[] ish = a;
             int[] iis = a;
             int[] iisn = new int[a.Length];
@@ -310,13 +327,6 @@ namespace lab13_1
                 leng *= a.GetLength(i);
             }
             return leng;
-        }
-        static int[,] sorted2d(int[,] a)
-        {
-            for (int i = 0; i < a.Rank; i++)
-            {
-                Array.Sort(a[i]);
-            }
         }
     }
 }
