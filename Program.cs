@@ -1,5 +1,6 @@
 ﻿using System;
-using System.Linq;
+using System.Collections.Specialized;
+using System.Threading.Tasks;
 
 namespace lab13_1
 {
@@ -8,7 +9,7 @@ namespace lab13_1
         static void Main(string[] args)
         {
             // Number 1
-            int a, b ,c;
+            int a, b, c;
             Console.WriteLine("Type 2 numbers 1 in line");
             Console.Write("-> ");
             a = Convert.ToInt32(Console.ReadLine());
@@ -61,18 +62,13 @@ namespace lab13_1
         {
             if (a > b)
                 a = b;
-            else
-                b = a;
             if (a > c)
                 a = c;
-            else
-                c = a;
             return a;
         }
         static int Num2_2(int a, int b, int c)
         {
-            if (a > b) b = a;
-            else a = b;
+            if (a < b) a = b;
             if (a > c) c = a;
             return c;
         }
@@ -95,7 +91,7 @@ namespace lab13_1
         static void Task5()
         {
             // 5.1
-            int[] a = {5, 7, 8, 123, 324, 43};
+            int[] a = { 5, 7, 8, 123, 324, 43 };
             int[] b = new int[5];
             int[] c = new int[5];
             int minis = 1000000,
