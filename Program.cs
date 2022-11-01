@@ -1,5 +1,8 @@
 ﻿using System;
-using System.Linq;
+using System.IO;
+using System.Text;
+using System.Collections.Specialized;
+using System.Threading.Tasks;
 
 namespace lab13_1
 {
@@ -8,7 +11,7 @@ namespace lab13_1
         static void Main(string[] args)
         {
             // Number 1
-            int a, b ,c;
+            int a, b, c;
             Console.WriteLine("Type 2 numbers 1 in line");
             Console.Write("-> ");
             a = Convert.ToInt32(Console.ReadLine());
@@ -56,23 +59,21 @@ namespace lab13_1
 
             // Number 6
             Task6();
+
+            // Number 7
+            Task7();
         }
         static int Num2(int a, int b, int c)
         {
             if (a > b)
                 a = b;
-            else
-                b = a;
             if (a > c)
                 a = c;
-            else
-                c = a;
             return a;
         }
         static int Num2_2(int a, int b, int c)
         {
-            if (a > b) b = a;
-            else a = b;
+            if (a < b) a = b;
             if (a > c) c = a;
             return c;
         }
@@ -95,7 +96,7 @@ namespace lab13_1
         static void Task5()
         {
             // 5.1
-            int[] a = {5, 7, 8, 123, 324, 43};
+            int[] a = { 5, 7, 8, 123, 324, 43 };
             int[] b = new int[5];
             int[] c = new int[5];
             int minis = 1000000,
@@ -254,8 +255,182 @@ namespace lab13_1
             Console.WriteLine();
 
             //6.5
-            
+            int temp = 0;
+            for (int i = 0; i < array2d1.Rank; i++)
+            {
+                for (int j = 0; j < array2d1.GetLength(i) - 1; j++)
+                {
+                    for (int h = 0; h < array2d1.GetLength(i); h++)
+                    {
+                        if (array2d1[i, j] > array2d1[j, h])
+                        {
+                            temp = array2d1[i, j];
+                            array2d1[i, j] = array2d1[j, h];
+                            array2d1[j, h] = temp;
+                        }
+                    }
+                }
+            }
 
+            //
+        }
+        static void Task7()
+        {
+            // 7.3
+            string input;
+            string output = "";
+            bool Name = true;
+            Console.WriteLine("Type full name of person!");
+            input = Console.ReadLine();
+            for (int i = 0; i < input.Length; i++)
+            {
+                if (input[i] == ' ') Name = false;
+                if (Name)
+                {
+                    output += input[i];
+                }
+                else
+                {
+                    if (input[i] == ' ') output += " " + input[i + 1] + ".";
+                }
+            }
+            Console.WriteLine(output);
+
+            // 7.2
+            input = "";
+            string temp = "";
+            int Day = -1, Month = -1, Year = -1;
+            Console.WriteLine("Type data in string!");
+            input = Console.ReadLine();
+            for (int i = 0; i < input.Length; i++)
+            {
+                if (input[i] == ' ')
+                {
+                    if (Day == -1)
+                    {
+                        Day = Convert.ToInt32(temp);
+                    }
+                    else if (Month == -1)
+                    {
+                        switch (temp)
+                        {
+                            case "January": Month = 1; break;
+                            case "February": Month = 2; break;
+                            case "March": Month = 3; break;
+                            case "April": Month = 4; break;
+                            case "May": Month = 5; break;
+                            case "June": Month = 6; break;
+                            case "July": Month = 7; break;
+                            case "August": Month = 8; break;
+                            case "September": Month = 9; break;
+                            case "October": Month = 10; break;
+                            case "November": Month = 11; break;
+                            case "December": Month = 12; break;
+                            default: Month = 1; break;
+                        }
+                    }
+                    else if (Year == -1)
+                    {
+                        Year = Convert.ToInt32(temp);
+                    }
+                }
+                else
+                {
+                    temp += input[i];
+                }
+            }
+            Console.WriteLine($"{Year}-{Month}-{Day}");
+        }
+        static void Task8()
+        {
+
+        }
+        struct Worker
+        {
+            public int Id;
+            public string Name;
+            public string Department;
+            public int Salary;
+            public void GetInfo()
+            {
+                Console.WriteLine("Type new Id");
+                Id = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("Type name");
+                Name = Console.ReadLine();
+                Console.WriteLine("Type department");
+                Department = Console.ReadLine();
+                Console.WriteLine("Type salary");
+                Salary = Convert.ToInt32(Console.ReadLine());
+            }
+        }
+        static void Task9()
+        {
+            // 9.1
+            string path = "MyDir\\file.txt";
+            string input = File.ReadAllText(path);
+            int[] mass = new int[input.Length];
+            string[] readEveryLine = new string[input.Length];
+            for (int i = 0; i < readEveryLine.Length; i++)
+            {
+                mass[i] = Convert.ToInt32(readEveryLine[i]);
+            }
+            Console.WriteLine($"The summ is {SummerMass(mass)}");
+
+            // 9.2
+            Array.Sort(mass);
+            for (int i = 0; i < mass.Length; i++)
+            {
+                Console.Write(mass[i] + " ");
+            }
+
+            // 9.3
+            File.Create("Newfile.txt");
+            string path2 = "MyDir\\Newfile.txt";
+            for (int i = 0; i < mass.Length; i++)
+            {
+                File.WriteAllText(path2, Convert.ToString(mass[i]));
+            }
+        }
+
+        class Person
+        {
+            private string _name = "";
+
+            public string Name
+            {
+                get { return _name; }
+                set { _name = value; }
+            }
+            public void Print()
+            {
+                Console.WriteLine(Name);
+            }
+        }
+
+        class Employee : Person
+        {
+            private int _id = 0;
+            private string _Department = "";
+
+            public int Id
+            {
+                get { return _id; }
+                set { _id = value; }
+            }
+            public string Department
+            {
+                get { return _Department; }
+                set { _Department = value; }
+            }
+
+            public void PrintID()
+            {
+                Console.WriteLine(Id);
+            }
+            public void PrintDep()
+            {
+                Console.WriteLine(Department);
+            }
         }
         static void Outputer(int[,] a)
         {
@@ -282,7 +457,7 @@ namespace lab13_1
                         index[1] = i;
                         index[2] = j;
                     }
-                    
+
                 }
             }
             return index;
@@ -327,6 +502,20 @@ namespace lab13_1
                 leng *= a.GetLength(i);
             }
             return leng;
+        }
+        static int[] Sorter(int[] a)
+        {
+            Array.Sort(a);
+            return a;
+        }
+        static int SummerMass(int[] a)
+        {
+            int s = 0;
+            for (int i = 0; i < a.Length; i++)
+            {
+                s += a[i];
+            }
+            return s;
         }
     }
 }
